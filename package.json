@@ -4,6 +4,7 @@
     "build": "tsc --noEmit && vite build"
   },
   "dependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.68.5",
     "canvas-confetti": "^1.2.0",
     "uuid": "^13.0.2"
   },

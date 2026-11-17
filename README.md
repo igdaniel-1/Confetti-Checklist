@@ -1,8 +1,9 @@
-# Practice List
+# Confetti To Do List
+A to-do list that motivates you to tick off your tasks with some fun confetti!
 
 ## Execution Instructions
 
-Install dependencies:
+### Install dependencies:
 
 ```sh
 npm install
