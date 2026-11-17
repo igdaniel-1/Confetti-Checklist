@@ -1,5 +1,8 @@
-import {v4 as uuidV4} from 'uuid'
-
+import {v4 as uuidV4} from 'uuid';
+// import {v4 as uuidV4} from 'uuid';
+// declare module "uuid/v4" {
+//   export {v4 as default} from "@types/uuid";
+// }
 
 type Task = {
   id: string,

@@ -1,24 +1,25 @@
-# New Project
+# Practice List
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+## Execution Instructions
 
-## Available Scripts
+Install dependencies:
 
-### npm start
+```sh
+npm install
+```
 
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+### Development
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
+```sh
+npm start
+```
 
-### npm run build
+Open http://localhost:5173 to view the app.
 
-Builds a static copy of your site to the `build/` folder.
-Your app is ready to be deployed!
+### Production build
 
-**For the best production performance:** Add a build bundler plugin like [@snowpack/plugin-webpack](https://github.com/snowpackjs/snowpack/tree/main/plugins/plugin-webpack) or [snowpack-plugin-rollup-bundle](https://github.com/ParamagicDev/snowpack-plugin-rollup-bundle) to your `snowpack.config.mjs` config file.
+```sh
+npm run build
+```
 
-### Q: What about Eject?
-
-No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
+This type-checks the TypeScript source and writes the production site to `dist/`.
