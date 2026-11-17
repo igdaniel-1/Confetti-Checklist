@@ -1,8 +1,52 @@
 import {v4 as uuidV4} from 'uuid';
-// import {v4 as uuidV4} from 'uuid';
-// declare module "uuid/v4" {
-//   export {v4 as default} from "@types/uuid";
-// }
+import { createRoot } from 'react-dom/client';
+import { useEffect, useRef, useState } from 'react';
+import { useWindowSize } from 'react-use'
+import Confetti from 'react-confetti'
+
+const TASK_CHECKED_EVENT = 'task-checked';
+const confettiRootElement = document.querySelector<HTMLDivElement>('#confetti-root');
+
+if (!confettiRootElement) {
+  throw new Error('Missing #confetti-root element');
+}
+
+createRoot(confettiRootElement).render(<ConfettiOverlay />);
+
+function ConfettiOverlay() {
+  const { width, height } = useWindowSize()
+  const [isVisible, setIsVisible] = useState(false);
+  const [burstId, setBurstId] = useState(0);
+  const timeoutId = useRef<number | undefined>(undefined);
+
+  useEffect(() => {
+    const handleTaskChecked = () => {
+      setIsVisible(true);
+      setBurstId((currentId) => currentId + 1);
+
+      if (timeoutId.current !== undefined) {
+        window.clearTimeout(timeoutId.current);
+      }
+
+      timeoutId.current = window.setTimeout(() => {
+        setIsVisible(false);
+        timeoutId.current = undefined;
+      }, 3000);
+    };
+
+    window.addEventListener(TASK_CHECKED_EVENT, handleTaskChecked);
+    return () => {
+      window.removeEventListener(TASK_CHECKED_EVENT, handleTaskChecked);
+      if (timeoutId.current !== undefined) {
+        window.clearTimeout(timeoutId.current);
+      }
+    };
+  }, []);
+
+  return isVisible
+    ? <Confetti key={burstId} width={width} height={height} />
+    : null;
+}
 
 type Task = {
   id: string,
@@ -28,7 +72,6 @@ taskList.forEach(addListItem)
 // the ?s ensure that the object is there before trying to access its value
 form?.addEventListener("submit", e=>{
   e.preventDefault()
-  console.log("anything");
 
   if (inputLabel?.value == "" || inputLabel?.value == null) return 
 
@@ -63,6 +106,10 @@ function addListItem (task: Task){
     task.checked = checkbox.checked
     // update the record in the locally stored task list
     updateLocalStorage();
+
+    if (checkbox.checked) {
+      window.dispatchEvent(new Event(TASK_CHECKED_EVENT));
+    }
   })
   checkbox.type = "checkbox"
   checkbox.checked = task.checked
