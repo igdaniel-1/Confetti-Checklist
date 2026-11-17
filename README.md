@@ -1,4 +1,4 @@
-# Confetti To Do List
+# Confetti Checklist
 A to-do list that motivates you to tick off your tasks with some fun confetti!
 
 ## Execution Instructions
