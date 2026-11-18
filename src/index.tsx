@@ -44,7 +44,7 @@ function ConfettiOverlay() {
   }, []);
 
   return isVisible
-    ? <Confetti key={burstId} width={width} height={height} />
+    ? <Confetti key={burstId} width={width} height={height} numberOfPieces={1000}/>
     : null;
 }
 
