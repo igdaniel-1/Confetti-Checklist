@@ -44,7 +44,42 @@ function ConfettiOverlay() {
   }, []);
 
   return isVisible
-    ? <Confetti key={burstId} width={width} height={height} numberOfPieces={1000}/>
+    ? <Confetti 
+      key={burstId} 
+      width={width} 
+      height={height} 
+      numberOfPieces={1000}
+      drawShape={ctx => {
+        ctx.beginPath()
+        //  draw spiral shape
+        for(let i = 0; i < 22; i++) {
+          const angle = 0.35 * i
+          const x = (0.2 + (1.5 * angle)) * Math.cos(angle)
+          const y = (0.2 + (1.5 * angle)) * Math.sin(angle)
+          ctx.lineTo(x, y)
+        }
+
+
+        // draw star --> buggy, looks like a shuriken lol
+        // for(let i = 0; i < 22; i++) {
+        //   const interiorAngle = 0.36 * i
+        //   const exteriorAngle = 1.08 * i
+        //   let x = 0;
+        //   let y = 0;
+        //   if (i%2!=1){
+        //     x = (0.2 + (1.5 * exteriorAngle)) * Math.cos(exteriorAngle)
+        //     y = (0.2 + (1.5 * exteriorAngle)) * Math.sin(exteriorAngle)
+        //   }else{
+        //     x = (0.2 + (1.5 * interiorAngle)) * Math.cos(interiorAngle)
+        //     y = (0.2 + (1.5 * interiorAngle)) * Math.sin(interiorAngle)
+        //   }
+        //   ctx.lineTo(x, y)
+        // }
+
+        ctx.stroke()
+        ctx.closePath()
+      }}
+      />
     : null;
 }
 
